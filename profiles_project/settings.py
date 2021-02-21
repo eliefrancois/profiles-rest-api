@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework', # Enables REST Framework
+    'rest_framework.authtoken', # Enables Auth token 
+    'profiles_api', # App for our profiles REST API
+
 ]
 
 MIDDLEWARE = [
@@ -118,3 +122,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'profiles_api.UserProfile' # This tells django to use this model for all authentication and user registration in application
