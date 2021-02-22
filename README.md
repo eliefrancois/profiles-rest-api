@@ -2,7 +2,9 @@
 
 # API Features
 **Login User**
+
 **Register User**
+
 **Record Paitent Data**
 
 
