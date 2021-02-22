@@ -1,4 +1,10 @@
-# Vejovis Analyics Patient Profile REST API
+# Vejovis Analyics REST API
+
+# API Features
+**Login User**
+**Register User**
+**Record Paitent Data**
+
 
 ## Git
 
