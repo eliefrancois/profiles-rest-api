@@ -7,7 +7,7 @@
 
 **-Record Paitent Data**
 
-**-DEMO GET, PUT, PATCH, DELETE Fuctions**
+**-Demo GET, PUT, PATCH, DELETE Functions**
 
 
 ## Git

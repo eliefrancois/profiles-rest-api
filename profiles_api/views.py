@@ -2,7 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status # This returns HTTP status codes from API, will use this in post function handler
 from rest_framework import viewsets
-from profiles_api import serializers # WIll use this to tell API what data to exect when making a POST PUT PATCH request to API
+from rest_framework.authentication import TokenAuthentication
+
+from profiles_api import serializers # Will use this to tell API what data to exect when making a POST PUT PATCH request to API
+from profiles_api import models
+from profiles_api import permissions
+
 
 class HelloAPiView(APIView): 
     """Test API View"""
@@ -101,3 +106,11 @@ class HelloViewSet(viewsets.ViewSet):
         """Handle removing an object"""
 
         return Response({'http_method': 'DELETE'})
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handle creating, creating and updating profiles"""
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+
+    authentication_class = (TokenAuthentication,)
+    permission_classes =(permissions.UpdateOwnProfile,)
