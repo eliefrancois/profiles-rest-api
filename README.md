@@ -1,11 +1,13 @@
 # Vejovis Analyics REST API
 
 # API Features
-**Login User**
+**-Login User**
 
-**Register User**
+**-Register User**
 
-**Record Paitent Data**
+**-Record Paitent Data**
+
+**-DEMO GET, PUT, PATCH, DELETE Fuctions**
 
 
 ## Git
