@@ -1,14 +1,9 @@
 # Vejovis Analyics REST API
 
 # API Features
-**-Login User**
-
-**-Register User**
+**-Login/Register Patient**
 
 **-Record Paitent Data**
-
-**-Demo GET, PUT, PATCH, DELETE Functions**
-
 
 ## Git
 
