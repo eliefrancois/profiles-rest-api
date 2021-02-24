@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings # used to retreive AUTH_USER_MODEL from settings.py file
 
 # These two imports allow for the default user model to be customized or overrided 
 from django.contrib.auth.models import AbstractBaseUser 
@@ -36,7 +37,7 @@ class UserProfileManager(BaseUserManager):
             
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
-    """Database model for users in the system"""
+    """Database model for patients in the system"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
@@ -58,3 +59,29 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """Return string representation of user"""
         return self.email
+
+
+class PatientInfo(models.Model):
+    """Database model for patient information"""
+
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL, # This points to the usermodel used for authentication in settings.py, if we need to change the model used change it there
+        on_delete=models.CASCADE
+    )
+
+    # Patient insulin injected choices
+    YES = 'YES'
+    NO = 'NO'
+
+    IS_INSULIN_INJECTED_CHOICES = [
+        (YES, 'YES'),
+        (NO, 'NO'),
+    ]
+
+    inject_date = models.DateField(auto_now_add=True, auto_now=False, blank= False)
+    inject_time = models.TimeField(auto_now_add=True, auto_now=False, blank= False)
+    blood_sugar_level = models.CharField(max_length=20, blank= False)
+    is_insulin_injected = models.CharField(choices = IS_INSULIN_INJECTED_CHOICES, default = 1, max_length=3, blank= False)
+    quantity = models.CharField(max_length=10, blank= False)
+    inject_area = models.TextField(blank= False)
+

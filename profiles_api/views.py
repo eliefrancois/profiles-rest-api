@@ -4,6 +4,7 @@ from rest_framework import status # This returns HTTP status codes from API, wil
 from rest_framework import viewsets
 from rest_framework import filters
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated 
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
@@ -124,3 +125,16 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 class UserLoginApiView(ObtainAuthToken):
     """Handle creating user authentication tokens"""
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+class PatientInfoViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating patient info objects"""
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.PatientInfoSerializer # This points to the
+    queryset = models.PatientInfo.objects.all()
+    permission_classes = (permissions.UpdateOwnReading, IsAuthenticated,) # Validates that a user is authenticated to read or modify objects
+    
+
+    def perform_create(self, serializer): # overridijg this function so that when a user tries to create an object they are validated as the current user
+        """Sets the patient profile to the logged in user"""
+        serializer.save(user_profile=self.request.user) # This sets the user profile to the current user from the serializer passed in 

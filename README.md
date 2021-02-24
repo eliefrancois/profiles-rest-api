@@ -3,7 +3,7 @@
 # API Features
 **-Login/Register Patient**
 
-**-Record Paitent Data**
+**-Record Patient Data**
 
 ## Git
 

@@ -35,3 +35,16 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
  
         return super().update(instance, validated_data)   
+
+
+class PatientInfoSerializer(serializers.ModelSerializer):
+    """Serializes patient Info objects"""
+
+    class Meta:
+        model = models.PatientInfo # Points this serializer to the patient info model
+        fields = ('id','user_profile','inject_date', 'inject_time', 'blood_sugar_level', 'is_insulin_injected', 'quantity', 'inject_area',)
+        extra_kwargs = {
+            'user_profile': {
+                'read_only': True,
+            }
+        }
